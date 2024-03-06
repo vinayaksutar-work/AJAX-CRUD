@@ -58,6 +58,18 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
+    function readRecords()
+    {
+        var readrecord = "readrecord";
+        $.ajax({
+            url : "backend.php",
+            type : "post",
+            data : { readrecord : readrecord },
+            success : function(data,status){
+                $('#records_content').html(data);
+            }
+        })
+    }
     function addRecord()
     {
         var firstname = $('#firstname').val();
