@@ -50,4 +50,33 @@ if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['emai
     mysqli_query($conn,$sql);
 }
 
+if(isset($_POST['deleteid']))
+{
+    $userid = $_POST['deleteid'];
+    $deletequery = "DELETE FROM crud WHERE id = '$userid'";
+    mysqli_query($conn,$deletequery);
+}
+
+if(isset($_POST['id']) && isset($_POST['id']) != "")
+{
+    $userid = $_POST['id'];
+    $updatequery = "SELECT * FROM crud WHERE id = '$userid'";
+    if(!$result= mysqli_query($conn,$updatequery))
+    {
+        exit(mysqli_error($conn));
+    }
+    $response = array();
+    if(mysqli_num_rows($result)>0)
+    {
+        while($row=mysqli_fetch_assoc($result))
+        {
+            $response = $row;
+        }
+    }
+    else
+    {
+        $response['status'] = 200;
+        $response['message'] = "Data not found !";
+    }
+}
 ?>
